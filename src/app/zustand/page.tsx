@@ -8,18 +8,26 @@ const useCounter = create<{counter: number, increment: () => void}>((set) => ({
 
 let views = 0
 
-const OtherComponent: React.FC = () => {
+const Zustand1: React.FC = () => {
+  const increment = useCounter(state => state.increment)
   views++
-  return <div>OtherComponent Views: {views}</div>
+  return <div>
+    <div>Views: {views}</div>
+    <button onClick={increment}>Increment</button>
+  </div>
 }
 
-const Zustand: React.FC = () => {
-  const {counter, increment} = useCounter()
-  return <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    <div>Zustand Counter: {counter} Views: {views}</div>
+const Zustand2: React.FC = () => {
+  const {increment, counter} = useCounter()
+  return <div>
+    <div>Counter: {counter}</div>
     <button onClick={increment}>Increment</button>
-    <OtherComponent/>
-  </main>
+  </div>
 }
+
+const Zustand: React.FC = () => (<main className="flex min-h-screen flex-col items-center justify-between p-24">
+  <Zustand1/>
+  <Zustand2/>
+</main>)
 
 export default Zustand
