@@ -12,6 +12,7 @@ const Zustand1: React.FC = () => {
   const increment = useCounter(state => state.increment)
   views++
   return <div>
+    <title>Zustand View</title>
     <div>Views: {views}</div>
     <button onClick={increment}>Increment</button>
   </div>
@@ -20,6 +21,7 @@ const Zustand1: React.FC = () => {
 const Zustand2: React.FC = () => {
   const {increment, counter} = useCounter()
   return <div>
+    <title>Zustand Counter</title>
     <div>Counter: {counter}</div>
     <button onClick={increment}>Increment</button>
   </div>

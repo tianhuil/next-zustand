@@ -11,23 +11,29 @@ const CounterState = createContainer(() => {
 })
 
 const OtherComponent: React.FC = () => {
+    const {increment} = CounterState.useContainer()
     views++
-    return <div>OtherComponent Views: {views}</div>
+    return <div>
+        <div>OtherComponent Views: {views}</div>
+        <button onClick={increment}>Increment</button>
+    </div>
 }
 
 const _Page: React.FC = () => {
   const {counter, increment} = CounterState.useContainer()
-  return <main className="flex min-h-screen flex-col items-center justify-between p-24">
+  return <div >
     <div>Unstated Counter: {counter.count} </div>
     <button onClick={increment}>Increment</button>
-    <OtherComponent/>
-  </main>
+  </div>
 }
 
 const Page: React.FC = () => {
-    return <CounterState.Provider>
-        <_Page />
-    </CounterState.Provider>
+    return <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <CounterState.Provider>
+            <_Page />
+            <OtherComponent/>
+        </CounterState.Provider>
+    </main>
 }
 
 export default Page
